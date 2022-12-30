@@ -2,14 +2,14 @@
   <div>
     <div v-if="projects.length">
       <div v-for="project in projects" :key="project.id">
-        <h3>{{ project.title }}</h3>
+        <SingleProjectVue :project="project" />
       </div>
     </div>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
+import SingleProjectVue from "@/components/SingleProject.vue";
 
 export default {
   name: "HomeView",
@@ -28,6 +28,10 @@ export default {
       .catch((err) =>
         console.log(`Error occured while fetching ${err.message}`)
       );
+  },
+
+  components: {
+    SingleProjectVue,
   },
 };
 </script>
