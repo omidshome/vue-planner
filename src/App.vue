@@ -1,6 +1,18 @@
 <template>
-  <div>Hi</div>
+  <div>
+    <HomeViewVue></HomeViewVue>
+  </div>
 </template>
+
+<script>
+import HomeViewVue from "./views/HomeView.vue";
+
+export default {
+  components: {
+    HomeViewVue,
+  },
+};
+</script>
 
 <style>
 body {

@@ -1,5 +1,11 @@
 <template>
-  <div></div>
+  <div>
+    <div v-if="projects.length">
+      <div v-for="project in projects" :key="project.id">
+        <h3>{{ project.title }}</h3>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
