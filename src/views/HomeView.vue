@@ -2,7 +2,7 @@
   <div>
     <div v-if="projects.length">
       <div v-for="project in projects" :key="project.id">
-        <SingleProjectVue :project="project" />
+        <SingleProjectVue :project="project" @deletedId="onDeleltedProject" />
       </div>
     </div>
   </div>
@@ -19,6 +19,11 @@ export default {
     };
   },
   components: {},
+  methods: {
+    onDeleltedProject(id) {
+      this.projects = this.projects.filter((project) => project.id !== id);
+    },
+  },
   mounted() {
     fetch("http://localhost:3000/projects")
       .then((data) => data.json())

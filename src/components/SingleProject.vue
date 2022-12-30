@@ -1,11 +1,70 @@
 <template>
-  <div>
-    <h3>{{ project.title }}</h3>
+  <div class="project">
+    <div class="action">
+      <h3 @click="showDetail = !showDetail">{{ project.title }}</h3>
+      <div class="icons">
+        <span class="material-symbols-outlined"> edit </span>
+        <span class="material-symbols-outlined" @click="deleteProject">
+          delete
+        </span>
+        <span class="material-symbols-outlined"> done </span>
+      </div>
+    </div>
+
+    <div class="detail" v-if="showDetail">
+      {{ project.detail }}
+    </div>
   </div>
 </template>
 
 <script>
 export default {
   props: ["project"],
+  methods: {
+    deleteProject() {
+      fetch(this.url, { method: "DELETE" })
+        .catch("Somethig went wrong")
+        .then(() => this.$emit("deletedId", this.project.id));
+      console.log(`project ${this.project.id} was deleted`);
+    },
+  },
+  data() {
+    return {
+      showDetail: false,
+      url: "http://localhost:3000/projects/" + this.project.id,
+    };
+  },
 };
 </script>
+
+<style>
+.project {
+  margin: 20px auto;
+  background: white;
+  padding: 10px 20px;
+  border-radius: 4px;
+  box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.5);
+  border-left: 4px solid #e90074;
+}
+
+h3 {
+  cursor: pointer;
+}
+
+.action {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.material-symbols-outlined {
+  font-size: 24px;
+  margin-left: 10px;
+  color: #bbb;
+  cursor: pointer;
+}
+
+.material-symbols-outlined:hover {
+  color: #777;
+}
+</style>
