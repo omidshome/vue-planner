@@ -1,5 +1,5 @@
 <template>
-  <div class="project">
+  <div class="project" :class="{ complete: project.complete == true }">
     <div class="action">
       <h3 @click="showDetail = !showDetail">{{ project.title }}</h3>
       <div class="icons">
@@ -7,7 +7,9 @@
         <span class="material-symbols-outlined" @click="deleteProject">
           delete
         </span>
-        <span class="material-symbols-outlined"> done </span>
+        <span class="material-symbols-outlined tick" @click="toggleComplete">
+          done
+        </span>
       </div>
     </div>
 
@@ -21,6 +23,13 @@
 export default {
   props: ["project"],
   methods: {
+    toggleComplete() {
+      fetch(this.url, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ complete: !this.project.complete }),
+      }).then(() => this.$emit("complete", this.project.id));
+    },
     deleteProject() {
       fetch(this.url, { method: "DELETE" })
         .catch("Somethig went wrong")
@@ -66,5 +75,13 @@ h3 {
 
 .material-symbols-outlined:hover {
   color: #777;
+}
+
+.project.complete {
+  border-left: 4px solid #00ce89;
+}
+
+.project.project.complete .tick {
+  color: #00ce89;
 }
 </style>

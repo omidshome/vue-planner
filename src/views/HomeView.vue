@@ -2,7 +2,11 @@
   <div>
     <div v-if="projects.length">
       <div v-for="project in projects" :key="project.id">
-        <SingleProjectVue :project="project" @deletedId="onDeleltedProject" />
+        <SingleProjectVue
+          :project="project"
+          @deletedId="onDeleltedProject"
+          @complete="handleComplete"
+        />
       </div>
     </div>
   </div>
@@ -20,6 +24,11 @@ export default {
   },
   components: {},
   methods: {
+    handleComplete(id) {
+      let p = this.projects.find((project) => project.id === id);
+      p.complete = !p.complete;
+      console.log(p);
+    },
     onDeleltedProject(id) {
       this.projects = this.projects.filter((project) => project.id !== id);
     },
