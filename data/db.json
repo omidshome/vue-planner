@@ -14,7 +14,7 @@
       "id": 2,
       "title": "Make marketing email!!!",
       "detail": "Do it as soon as possible!",
-      "complete": false,
+      "complete": true,
       "p": {
         "title": "Make marketing email",
         "detail": "Lorem Ipsum..."

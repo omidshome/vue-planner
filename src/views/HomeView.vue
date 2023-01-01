@@ -1,7 +1,8 @@
 <template>
-  <div>
+  <div class="home">
+    <FilterNavVue @filterChange="current = $event" :current="current" />
     <div v-if="projects.length">
-      <div v-for="project in projects" :key="project.id">
+      <div v-for="project in filteredProjects" :key="project.id">
         <SingleProjectVue
           :project="project"
           @deletedId="onDeleltedProject"
@@ -14,20 +15,32 @@
 
 <script>
 import SingleProjectVue from "@/components/SingleProject.vue";
+import FilterNavVue from "@/components/FilterNav.vue";
 
 export default {
-  name: "HomeView",
+  computed: {
+    filteredProjects() {
+      if (this.current === "completed") {
+        return this.projects.filter((p) => p.complete);
+      }
+      if (this.current === "ongoing") {
+        return this.projects.filter((p) => !p.complete);
+      }
+
+      return this.projects;
+    },
+  },
+
   data() {
     return {
       projects: [],
+      current: "all",
     };
   },
-  components: {},
   methods: {
     handleComplete(id) {
       let p = this.projects.find((project) => project.id === id);
       p.complete = !p.complete;
-      console.log(p);
     },
     onDeleltedProject(id) {
       this.projects = this.projects.filter((project) => project.id !== id);
@@ -46,6 +59,7 @@ export default {
 
   components: {
     SingleProjectVue,
+    FilterNavVue,
   },
 };
 </script>

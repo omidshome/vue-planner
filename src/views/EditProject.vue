@@ -22,7 +22,6 @@ export default {
         body: JSON.stringify({ title: this.title, detail: this.details }),
       })
         .then(() => {
-          console.log("Done!");
           this.$router.push({ name: "home" });
         })
         .catch((e) => console.log(`Something went wrong. Error: ${e.message}`));

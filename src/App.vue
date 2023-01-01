@@ -1,18 +1,21 @@
 <template>
   <div>
     <NavbarVue></NavbarVue>
-    <router-view> </router-view>
+
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
 import HomeViewVue from "./views/HomeView.vue";
 import NavbarVue from "./components/Navbar.vue";
+import FilterNavVue from "./components/FilterNav.vue";
 
 export default {
   components: {
     HomeViewVue,
     NavbarVue,
+    FilterNavVue,
   },
 };
 </script>
