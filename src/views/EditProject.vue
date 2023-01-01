@@ -2,11 +2,11 @@
   <div>
     <form @submit.prevent="handleSubmit">
       <label for="title">Title</label>
-      <input type="text" id="title" v-model="title" required />
+      <input type="text" id="title" v-model="title" />
       <label for="detail">Detail</label>
-      <textarea id="detail" v-model="details" required></textarea>
+      <textarea id="detail" v-model="details"></textarea>
 
-      <button type="submit">Add Project</button>
+      <button type="submit">Edit</button>
     </form>
   </div>
 </template>
@@ -14,30 +14,22 @@
 <script>
 import router from "../router";
 export default {
-  name: "AddProject",
-  methods: {
-    handleSubmit() {
-      let project = {
-        title: this.title,
-        detail: this.details,
-        complete: false,
-      };
+  props: ["id"],
 
-      fetch("http://localhost:3000/projects", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(project),
-      }).then(() => {
-        router.push("/").catch("Something went wrong!");
+  mounted() {
+    fetch(this.uri)
+      .then((res) => res.json())
+      .then((data) => {
+        this.title = data.title;
+        this.details = data.detail;
       });
-    },
   },
+
   data() {
     return {
       title: "",
       details: "",
+      uri: `http://localhost:3000/projects/${this.id}`,
     };
   },
 };
