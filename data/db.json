@@ -4,19 +4,31 @@
       "id": 1,
       "title": "Create new homepage banner",
       "detail": "Lorem Ipsum",
-      "complete": false
+      "complete": false,
+      "p": {
+        "title": "Create new homepage banner",
+        "detail": "Lorem Ipsum"
+      }
     },
     {
       "id": 2,
-      "title": "Make marketing email",
-      "detail": "Lorem Ipsum",
-      "complete": false
+      "title": "Make marketing email!!!",
+      "detail": "Do it as soon as possible!",
+      "complete": false,
+      "p": {
+        "title": "Make marketing email",
+        "detail": "Lorem Ipsum..."
+      }
     },
     {
-      "title": "Make my own website",
-      "detail": "It should be perfect and beautiful.",
-      "complete": false,
-      "id": 3
+      "title": "Make my own websites",
+      "detail": "They should be perfect and beautiful.",
+      "complete": true,
+      "id": 3,
+      "p": {
+        "title": "Make my own website",
+        "detail": "It should be perfect and beautiful."
+      }
     }
   ]
 }

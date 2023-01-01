@@ -6,15 +6,28 @@
       <label for="detail">Detail</label>
       <textarea id="detail" v-model="details"></textarea>
 
-      <button type="submit">Edit</button>
+      <button>Edit Project</button>
     </form>
   </div>
 </template>
 
 <script>
-import router from "../router";
 export default {
   props: ["id"],
+  methods: {
+    handleSubmit() {
+      fetch(this.uri, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ title: this.title, detail: this.details }),
+      })
+        .then(() => {
+          console.log("Done!");
+          this.$router.push({ name: "home" });
+        })
+        .catch((e) => console.log(`Something went wrong. Error: ${e.message}`));
+    },
+  },
 
   mounted() {
     fetch(this.uri)
